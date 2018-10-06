@@ -76,7 +76,6 @@ public class MainController {
 	public String listProductHandler(Model model,
 			@RequestParam(value ="name", defaultValue = "") String likeName,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
-		
 		final int maxResult = 5;
 		final int maxNavigationPage = 10;
 		
@@ -84,7 +83,6 @@ public class MainController {
 				maxResult,
 				maxNavigationPage,
 				likeName);
-		
 		model.addAttribute("paginationProducts", result);
 
 		return "productList";
@@ -97,18 +95,12 @@ public class MainController {
 		
 		Product product = null;
 		if(!StringUtils.isEmpty(code)) {
-			System.out.println("code: " + code);
 			product = productDAO.findProduct(code);
-		} else {
-			System.out.println("code is empty ");			
 		}
 		if(product != null) {
 			CartInfo cartInfo = Utils.getCartInSession(request);
 			ProductInfo productInfo = new ProductInfo(product);
-			
 			cartInfo.addProduct(productInfo, 1);
-		} else {
-			System.out.println("product is empty ");			
 		}
 
 		return "redirect:/shoppingCart";
@@ -125,9 +117,7 @@ public class MainController {
 		}
 		if(product != null) {
 			CartInfo cartInfo = Utils.getCartInSession(request);
-			
 			ProductInfo productInfo = new ProductInfo(product);
-			
 			cartInfo.removeProduct(productInfo);
 		}
 		
@@ -161,11 +151,8 @@ public class MainController {
 		if(cartInfo.isEmpty()) {
 			return "redirect:/shoppingCart";
 		}
-
 		CustomerInfo customerInfo = cartInfo.getCustomerInfo();
-
 		CustomerForm customerForm = new CustomerForm(customerInfo);
-		
 		model.addAttribute("customerForm", customerForm);
 		
 		return "shoppingCartCustomer";
@@ -179,13 +166,10 @@ public class MainController {
 			BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		
-		
 		if (result.hasErrors()) {
 			customerForm.setValid(false);
-			System.out.println("result.hasErrors()");
+			
 			return "shoppingCartCustomer";
-		} else {
-			System.out.println("result does not hasErrors()");			
 		}
 		
 		customerForm.setValid(true);
