@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/admin/orderList",
 				"/admin/order",
 				"/admin/accountInfo")
-		.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER'");
+		.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
 		
 		// Pages only for MANAGER
 		http.authorizeRequests().antMatchers("/admin/product").access("hasRole('ROLE_MANAGER')");
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Configuration for Login Form.
 		http.authorizeRequests().and().formLogin()
 			.loginProcessingUrl("/j_spring_security_check")
-			.loginPage("/admin_login")
+			.loginPage("/admin/login")
 			.defaultSuccessUrl("/admin/accountInfo")
 			.failureUrl("/admin/login?error=true")
 			.usernameParameter("userName")

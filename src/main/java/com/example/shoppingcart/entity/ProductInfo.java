@@ -15,4 +15,10 @@ public class ProductInfo {
 	private String name;
 	private double price;
 	
+	public ProductInfo(Product product) {
+		this.code = product.getCode();
+		this.name = product.getName();
+		this.price = product.getPrice();
+	}
+	
 }
